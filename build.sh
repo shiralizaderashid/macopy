@@ -8,7 +8,7 @@ BUNDLE="${BUILD}/${APP}.app"
 MACOS="${BUNDLE}/Contents/MacOS"
 RESOURCES="${BUNDLE}/Contents/Resources"
 
-echo "🔨  ${APP} build edilir..."
+echo "🔨  Building ${APP}..."
 
 mkdir -p "${MACOS}" "${RESOURCES}"
 
@@ -25,10 +25,10 @@ swiftc \
 cp "${ROOT}/Info.plist" "${BUNDLE}/Contents/Info.plist"
 
 echo ""
-echo "✅  Hazırdır: ${BUNDLE}"
+echo "✅  Done: ${BUNDLE}"
 echo ""
-echo "▶  Başlatmaq üçün:"
+echo "▶  To launch:"
 echo "   open '${BUNDLE}'"
 echo ""
-echo "📦  Applications-a köçürmək üçün:"
+echo "📦  To install to Applications:"
 echo "   cp -r '${BUNDLE}' /Applications/"

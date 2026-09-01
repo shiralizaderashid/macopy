@@ -38,7 +38,7 @@ class SettingsWindowController: ObservableObject {
             backing:     .buffered,
             defer:       false
         )
-        w.title = "Macopy — Ayarlar"
+        w.title = "Macopy — Settings"
         w.contentView = hosting
         w.isReleasedWhenClosed = false
         w.center()
@@ -107,13 +107,13 @@ struct SettingsView: View {
         VStack(spacing: 24) {
 
             // Title
-            Text("Klaviatura Qısayolu")
+            Text("Keyboard Shortcut")
                 .font(.headline)
 
             // Shortcut recorder
             VStack(spacing: 10) {
                 HStack(spacing: 14) {
-                    Text("Qısayol:")
+                    Text("Shortcut:")
                         .foregroundStyle(.secondary)
                         .frame(width: 70, alignment: .trailing)
 
@@ -125,7 +125,7 @@ struct SettingsView: View {
                             controller.startRecording()
                         }
                     } label: {
-                        Text(controller.isRecording ? "Basın…" : controller.pendingConfig.displayString)
+                        Text(controller.isRecording ? "Press keys…" : controller.pendingConfig.displayString)
                             .font(.system(size: 15, weight: .semibold, design: .monospaced))
                             .foregroundStyle(controller.isRecording ? Color.red : Color.primary)
                             .frame(minWidth: 110)
@@ -142,7 +142,7 @@ struct SettingsView: View {
                     .buttonStyle(.plain)
 
                     if !controller.isRecording {
-                        Button("Sıfırla") {
+                        Button("Reset") {
                             controller.pendingConfig = .default
                         }
                         .buttonStyle(.plain)
@@ -152,7 +152,7 @@ struct SettingsView: View {
                 }
 
                 if controller.isRecording {
-                    Text("Modifier (⌘ ⇧ ⌥ ⌃) + istənilən düymə • Escape ilə ləğv et")
+                    Text("Modifier (⌘ ⇧ ⌥ ⌃) + any key • Press Escape to cancel")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -160,11 +160,11 @@ struct SettingsView: View {
 
             // Buttons
             HStack(spacing: 12) {
-                Button("Ləğv Et") { controller.cancel() }
+                Button("Cancel") { controller.cancel() }
                     .buttonStyle(.bordered)
                     .keyboardShortcut(.escape, modifiers: [])
 
-                Button("Saxla") { controller.save() }
+                Button("Save") { controller.save() }
                     .buttonStyle(.borderedProminent)
                     .disabled(controller.isRecording)
                     .keyboardShortcut(.return, modifiers: [])

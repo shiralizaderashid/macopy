@@ -47,7 +47,7 @@ struct HistoryView: View {
             Spacer()
             if manager.items.contains(where: { !$0.isPinned }) {
                 Button { manager.clearAll() } label: {
-                    Text("Sil")
+                    Text("Clear")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -65,7 +65,7 @@ struct HistoryView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.tertiary)
                 .font(.system(size: 13))
-            TextField("Axtar...", text: $state.searchText)
+            TextField("Search...", text: $state.searchText)
                 .textFieldStyle(.plain)
                 .font(.system(size: 13))
                 .onChange(of: state.searchText) { _ in
@@ -94,7 +94,7 @@ struct HistoryView: View {
                 Image(systemName: "tray")
                     .font(.system(size: 36))
                     .foregroundStyle(.tertiary)
-                Text(state.searchText.isEmpty ? "Clipboard boşdur" : "Nəticə tapılmadı")
+                Text(state.searchText.isEmpty ? "Clipboard is empty" : "No results found")
                     .foregroundStyle(.secondary)
                     .font(.system(size: 13))
             }
@@ -141,12 +141,12 @@ struct HistoryView: View {
 
     private var footer: some View {
         HStack(spacing: 14) {
-            BadgeHint("↑↓", label: "Naviqasiya")
-            BadgeHint("↵",  label: "Yapışdır")
-            BadgeHint("⌘⌫", label: "Sil")
-            BadgeHint("⎋",  label: "Bağla")
+            BadgeHint("↑↓", label: "Navigate")
+            BadgeHint("↵",  label: "Paste")
+            BadgeHint("⌘⌫", label: "Delete")
+            BadgeHint("⎋",  label: "Close")
             Spacer()
-            Text("\(filtered.count) element")
+            Text("\(filtered.count) items")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build + Applications qovluğuna install et + başlat
+# Build, install to Applications, and launch
 
 set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
@@ -8,22 +8,22 @@ bash "${ROOT}/build.sh"
 
 APP="${ROOT}/.build/Macopy.app"
 
-echo "📦  /Applications qovluğuna kopyalanır..."
+echo "📦  Copying to /Applications..."
 cp -rf "${APP}" /Applications/Macopy.app
 
-echo "▶  Başladılır..."
+echo "▶  Launching..."
 open /Applications/Macopy.app
 
 echo ""
-echo "✅  Macopy işə salındı!"
-echo "   Menu bar-da 📋 ikonasına baxın."
-echo "   Tarixi açmaq üçün: ⌘ + ⇧ + V"
+echo "✅  Macopy is running!"
+echo "   Look for the 📋 icon in the menu bar."
+echo "   Open history with: ⌘ + ⇧ + V"
 
-# Login item olaraq əlavə et (macOS 13+)
+# Add login item (macOS 13+)
 osascript -e '
 tell application "System Events"
     if not (exists login item "Macopy") then
         make login item at end with properties {path:"/Applications/Macopy.app", hidden:false}
-        log "Login item əlavə edildi."
+        log "Login item added."
     end if
-end tell' 2>/dev/null && echo "   Kompüter açıldıqda avtomatik işə başlayacaq ✓" || true
+end tell' 2>/dev/null && echo "   Will launch automatically at login ✓" || true

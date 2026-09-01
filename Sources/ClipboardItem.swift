@@ -22,7 +22,7 @@ struct ClipboardItem: Identifiable {
     var displayText: String {
         switch content {
         case .text(let s): return s
-        case .image:       return "[Şəkil]"
+        case .image:       return "[Image]"
         }
     }
 
@@ -43,9 +43,9 @@ struct ClipboardItem: Identifiable {
 
     var timeAgo: String {
         let diff = Date().timeIntervalSince(timestamp)
-        if diff < 60     { return "İndicə" }
-        if diff < 3600   { return "\(Int(diff / 60))d əvvəl" }
-        if diff < 86400  { return "\(Int(diff / 3600))s əvvəl" }
-        return "\(Int(diff / 86400))g əvvəl"
+        if diff < 60     { return "Just now" }
+        if diff < 3600   { return "\(Int(diff / 60))m ago" }
+        if diff < 86400  { return "\(Int(diff / 3600))h ago" }
+        return "\(Int(diff / 86400))d ago"
     }
 }

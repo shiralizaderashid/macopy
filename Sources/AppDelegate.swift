@@ -35,19 +35,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard !AXIsProcessTrusted() else { return }
 
         let alert = NSAlert()
-        alert.messageText = "Accessibility İcazəsi Lazımdır"
+        alert.messageText = "Accessibility Permission Required"
         alert.informativeText = """
-            Auto-paste funksiyası üçün Macopy-yə Accessibility icazəsi lazımdır.
+            Macopy needs Accessibility access for auto-paste.
 
-            1. "Settings-i Aç" düyməsinə bas
-            2. Siyahıda Macopy-ni tapıb ✓ işarəsini qoy
-            3. Sonra "Yenidən Başlat" düyməsinə bas
+            1. Click "Open Settings"
+            2. Find Macopy in the list and enable it
+            3. Click "Restart" when done
 
-            (İcazəsiz də işləyir — element clipboarda kopyalanacaq, siz ⌘V ilə yapışdırarsınız.)
+            (Without permission, items are still copied to the clipboard — paste with ⌘V manually.)
             """
-        alert.addButton(withTitle: "Settings-i Aç")
-        alert.addButton(withTitle: "Yenidən Başlat")
-        alert.addButton(withTitle: "Sonra")
+        alert.addButton(withTitle: "Open Settings")
+        alert.addButton(withTitle: "Restart")
+        alert.addButton(withTitle: "Later")
 
         NSApp.activate(ignoringOtherApps: true)
         switch alert.runModal() {
@@ -89,16 +89,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func rebuildMenu() {
         let menu = NSMenu()
         let shortcut = hotkey?.config.displayString ?? "⌘⇧V"
-        menu.addItem(withTitle: "Tarixi Göstər  (\(shortcut))",
+        menu.addItem(withTitle: "Show History  (\(shortcut))",
                      action: #selector(showPanel), keyEquivalent: "").target = self
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Ayarlar…",
+        menu.addItem(withTitle: "Settings…",
                      action: #selector(showSettings), keyEquivalent: ",").target = self
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Tarixi Sil",
+        menu.addItem(withTitle: "Clear History",
                      action: #selector(clearHistory), keyEquivalent: "").target = self
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Çıx",
+        menu.addItem(withTitle: "Quit",
                      action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem?.menu = menu
     }
